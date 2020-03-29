@@ -46,6 +46,26 @@ export default function ProjectManager() {
       "N/A",
       "$1500"
     ),
+    createData(
+      "Bill Gates",
+      "31/03/2020",
+      "Custom Software",
+      "GPS, Push Notifications, Users/Authentication, File Transfer",
+      "Meduim",
+      "Web application",
+      "0-10",
+      "$1600"
+    ),
+    createData(
+      "Steve Jobs",
+      "1/04/2020",
+      "Custom Software",
+      "Photo/Video, File Transfer, Users/Authentication",
+      "High",
+      "Web Application",
+      "100+",
+      "$2500"
+    ),
   ]);
 
   const [websiteChecked, setWebsiteChecked] = useState(false);
@@ -130,8 +150,8 @@ export default function ProjectManager() {
           <FilterListIcon color="secondary" style={{ fontSize: 50 }} />
         </Grid>
       </Grid>
-      <Grid item>
-        <TableContainer component={Paper}>
+      <Grid item style={{ marginBottom: "5em" }}>
+        <TableContainer component={Paper} elevation={0}>
           <Table>
             <TableHead>
               <TableRow>
@@ -151,7 +171,9 @@ export default function ProjectManager() {
                   <TableCell>{row.name}</TableCell>
                   <TableCell>{row.date}</TableCell>
                   <TableCell>{row.service}</TableCell>
-                  <TableCell>{row.features}</TableCell>
+                  <TableCell style={{ maxWidth: "5em" }}>
+                    {row.features}
+                  </TableCell>
                   <TableCell>{row.complexity}</TableCell>
                   <TableCell>{row.platforms}</TableCell>
                   <TableCell>{row.users}</TableCell>
