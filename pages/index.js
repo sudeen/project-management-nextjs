@@ -137,6 +137,7 @@ export default function ProjectManager() {
   const [platforms, setPlatforms] = useState([]);
   const [features, setFeatures] = useState([]);
   const [search, setSearch] = useState("");
+  const [page, setPage] = React.useState(0);
 
   const addProject = () => {
     setRows([
@@ -183,6 +184,7 @@ export default function ProjectManager() {
         : (newRows[index].search = false)
     );
     setRows(newRows);
+    setPage(0);
     // console.log(matches);
   };
 
@@ -265,13 +267,8 @@ export default function ProjectManager() {
           </FormGroup>
         </Grid>
         {/* Table block */}
-        <Grid item container justify="flex-end" style={{ marginTop: "5em" }}>
-          <Grid item style={{ marginRight: 75 }}>
-            <FilterListIcon color="secondary" style={{ fontSize: 50 }} />
-          </Grid>
-        </Grid>
-        <Grid item style={{ marginBottom: "5em" }}>
-          <EnhancedTable rows={rows} />
+        <Grid item style={{ marginBottom: "6em", marginTop: "5em" }}>
+          <EnhancedTable rows={rows} page={page} setPage={setPage} />
         </Grid>
         <Dialog
           // style={{ zIndex: 1302 }}
