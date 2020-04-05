@@ -99,6 +99,13 @@ export default createMuiTheme({
         borderWidth: 2,
       },
     },
+    MuiSvgIcon: {
+      root: {
+        "&.MuiSelect-icon": {
+          fill: arcOrange,
+        },
+      },
+    },
     MuiFormControlLabel: {
       label: {
         color: arcBlue,
