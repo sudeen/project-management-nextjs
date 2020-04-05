@@ -29,6 +29,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { Button } from "@material-ui/core";
 import { format } from "date-fns";
+import { tr } from "date-fns/locale";
 
 const useStyles = makeStyles(theme => ({
   service: {
@@ -56,9 +57,20 @@ function createData(
   complexity,
   platforms,
   users,
-  total
+  total,
+  search
 ) {
-  return { name, date, service, features, complexity, platforms, users, total };
+  return {
+    name,
+    date,
+    service,
+    features,
+    complexity,
+    platforms,
+    users,
+    total,
+    search,
+  };
 }
 
 export default function ProjectManager() {
@@ -73,7 +85,8 @@ export default function ProjectManager() {
       "N/A",
       "N/A",
       "N/A",
-      "$1500"
+      "$1500",
+      true
     ),
     createData(
       "Bill Gates",
@@ -83,7 +96,8 @@ export default function ProjectManager() {
       "Meduim",
       "Web application",
       "0-10",
-      "$1600"
+      "$1600",
+      true
     ),
     createData(
       "Steve Jobs",
@@ -93,7 +107,8 @@ export default function ProjectManager() {
       "High",
       "Web Application",
       "100+",
-      "$2500"
+      "$2500",
+      true
     ),
   ]);
 
@@ -121,6 +136,7 @@ export default function ProjectManager() {
   const [users, setUsers] = useState("");
   const [platforms, setPlatforms] = useState([]);
   const [features, setFeatures] = useState([]);
+  const [search, setSearch] = useState("");
 
   const addProject = () => {
     setRows([
@@ -133,7 +149,8 @@ export default function ProjectManager() {
         service === "Website" ? "N/A" : complexity,
         service === "Website" ? "N/A" : platforms.join(", "),
         service === "Website" ? "N/A" : users,
-        `$${total}`
+        `$${total}`,
+        true
       ),
     ]);
     setDialogOpen(false);
@@ -147,6 +164,28 @@ export default function ProjectManager() {
     setFeatures([]);
   };
 
+  const handleSearch = event => {
+    setSearch(event.target.value);
+
+    const rowData = rows.map(row =>
+      Object.values(row).filter(option => option !== true && option !== false)
+    );
+
+    const matches = rowData.map(row =>
+      row.map(option =>
+        option.toLowerCase().includes(event.target.value.toLowerCase())
+      )
+    );
+    const newRows = [...rows];
+    matches.map((row, index) =>
+      row.includes(true)
+        ? (newRows[index].search = true)
+        : (newRows[index].search = false)
+    );
+    setRows(newRows);
+    // console.log(matches);
+  };
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container direction="column">
@@ -158,6 +197,8 @@ export default function ProjectManager() {
           <TextField
             placeholder="Search project details or create a new entry."
             style={{ width: "35em", marginLeft: "5em" }}
+            value={search}
+            onChange={handleSearch}
             InputProps={{
               endAdornment: (
                 <InputAdornment
@@ -245,20 +286,22 @@ export default function ProjectManager() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.date}</TableCell>
-                    <TableCell>{row.service}</TableCell>
-                    <TableCell style={{ maxWidth: "5em" }}>
-                      {row.features}
-                    </TableCell>
-                    <TableCell>{row.complexity}</TableCell>
-                    <TableCell>{row.platforms}</TableCell>
-                    <TableCell>{row.users}</TableCell>
-                    <TableCell>{row.total}</TableCell>
-                  </TableRow>
-                ))}
+                {rows
+                  .filter(row => row.search)
+                  .map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{row.name}</TableCell>
+                      <TableCell>{row.date}</TableCell>
+                      <TableCell>{row.service}</TableCell>
+                      <TableCell style={{ maxWidth: "5em" }}>
+                        {row.features}
+                      </TableCell>
+                      <TableCell>{row.complexity}</TableCell>
+                      <TableCell>{row.platforms}</TableCell>
+                      <TableCell>{row.users}</TableCell>
+                      <TableCell>{row.total}</TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>
