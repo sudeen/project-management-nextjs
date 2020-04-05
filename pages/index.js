@@ -29,7 +29,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { Button } from "@material-ui/core";
 import { format } from "date-fns";
-import { tr } from "date-fns/locale";
+import EnhancedTable from "../src/ui/EnhancedTable";
 
 const useStyles = makeStyles(theme => ({
   service: {
@@ -271,40 +271,7 @@ export default function ProjectManager() {
           </Grid>
         </Grid>
         <Grid item style={{ marginBottom: "5em" }}>
-          <TableContainer component={Paper} elevation={0}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Service</TableCell>
-                  <TableCell>Features</TableCell>
-                  <TableCell>Complexity</TableCell>
-                  <TableCell>Platforms</TableCell>
-                  <TableCell>Users</TableCell>
-                  <TableCell>Total</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows
-                  .filter(row => row.search)
-                  .map((row, index) => (
-                    <TableRow key={index}>
-                      <TableCell>{row.name}</TableCell>
-                      <TableCell>{row.date}</TableCell>
-                      <TableCell>{row.service}</TableCell>
-                      <TableCell style={{ maxWidth: "5em" }}>
-                        {row.features}
-                      </TableCell>
-                      <TableCell>{row.complexity}</TableCell>
-                      <TableCell>{row.platforms}</TableCell>
-                      <TableCell>{row.users}</TableCell>
-                      <TableCell>{row.total}</TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <EnhancedTable rows={rows} />
         </Grid>
         <Dialog
           // style={{ zIndex: 1302 }}
