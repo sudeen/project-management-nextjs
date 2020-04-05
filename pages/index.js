@@ -102,10 +102,21 @@ export default function ProjectManager() {
     createData(
       "Steve Jobs",
       "1/04/2020",
-      "Custom Software",
+      "Mobile App",
       "Photo/Video, File Transfer, Users/Authentication",
       "High",
-      "Web Application",
+      "iOS, Android",
+      "100+",
+      "$2500",
+      true
+    ),
+    createData(
+      "Mark Zukerberg",
+      "1/04/2020",
+      "Mobile App",
+      "Photo/Video, File Transfer, Users/Authentication",
+      "High",
+      "Android",
       "100+",
       "$2500",
       true
@@ -268,7 +279,16 @@ export default function ProjectManager() {
         </Grid>
         {/* Table block */}
         <Grid item style={{ marginBottom: "6em", marginTop: "5em" }}>
-          <EnhancedTable rows={rows} page={page} setPage={setPage} />
+          <EnhancedTable
+            rows={rows}
+            setRows={setRows}
+            page={page}
+            setPage={setPage}
+            websiteChecked={websiteChecked}
+            iOSChecked={iOSChecked}
+            androidChecked={androidChecked}
+            softwareChecked={softwareChecked}
+          />
         </Grid>
         <Dialog
           // style={{ zIndex: 1302 }}
