@@ -12,7 +12,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker,
+  KeyboardDatePicker
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -27,10 +27,10 @@ import Hidden from "@material-ui/core/Hidden";
 
 const useStyles = makeStyles(theme => ({
   service: {
-    fontWeight: 300,
+    fontWeight: 300
   },
   users: {
-    marginRight: 0,
+    marginRight: 0
   },
   button: {
     color: "#fff",
@@ -38,9 +38,9 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 50,
     textTransform: "none",
     "&:hover": {
-      backgroundColor: theme.palette.secondary.light,
-    },
-  },
+      backgroundColor: theme.palette.secondary.light
+    }
+  }
 }));
 
 function createData(
@@ -63,7 +63,7 @@ function createData(
     platforms,
     users,
     total,
-    search,
+    search
   };
 }
 
@@ -114,7 +114,7 @@ export default function ProjectManager() {
       "100+",
       "$2500",
       true
-    ),
+    )
   ]);
 
   const platformOptions = ["Web", "iOS", "Android"];
@@ -124,7 +124,7 @@ export default function ProjectManager() {
     "File Transfer",
     "Users/Authentication",
     "Biometrics",
-    "Push Notifications",
+    "Push Notifications"
   ];
   var websiteOptions = ["Basic", "Interactive", "E-Commerce"];
 
@@ -159,7 +159,7 @@ export default function ProjectManager() {
         service === "Website" ? "N/A" : users,
         `$${total}`,
         true
-      ),
+      )
     ]);
     setDialogOpen(false);
     setName("");
@@ -300,7 +300,7 @@ export default function ProjectManager() {
               disabled={service === "Website"}
               classes={{
                 label: classes.service,
-                root: classes.users,
+                root: classes.users
               }}
               value="0-10"
               label="0-10"
@@ -310,7 +310,7 @@ export default function ProjectManager() {
               disabled={service === "Website"}
               classes={{
                 label: classes.service,
-                root: classes.users,
+                root: classes.users
               }}
               value="10-100"
               label="10-100"
@@ -320,7 +320,7 @@ export default function ProjectManager() {
               disabled={service === "Website"}
               classes={{
                 label: classes.service,
-                root: classes.users,
+                root: classes.users
               }}
               value="100+"
               label="100+"
@@ -351,7 +351,7 @@ export default function ProjectManager() {
             placeholder="Search project details or create a new entry."
             style={{
               width: matchesSM ? "25em" : "35em",
-              marginLeft: matchesSM ? 0 : "5em",
+              marginLeft: matchesSM ? 0 : "5em"
             }}
             value={search}
             onChange={handleSearch}
@@ -364,7 +364,7 @@ export default function ProjectManager() {
                 >
                   <AddIcon color="primary" style={{ fontSize: 35 }} />
                 </InputAdornment>
-              ),
+              )
             }}
           />
         </Grid>
@@ -443,7 +443,7 @@ export default function ProjectManager() {
           style={{
             maxWidth: "100%",
             marginBottom: matchesMD ? "40em" : "35em",
-            marginTop: "5em",
+            marginTop: "5em"
           }}
         >
           <EnhancedTable
@@ -513,13 +513,15 @@ export default function ProjectManager() {
                     <Grid
                       item
                       style={{
-                        // zIndex: 1302,
-                        marginTop: matchesSM ? 50 : "5em",
+                        marginTop: matchesSM ? 50 : "5em"
                       }}
                     >
                       <Select
+                        MenuProps={{ style: { zIndex: 1302 } }}
                         disabled={service === "Website"}
-                        style={{ width: matchesSM ? 250 : "12em" }}
+                        style={{
+                          width: matchesSM ? 250 : "12em"
+                        }}
                         labelId="platforms"
                         id="platforms"
                         multiple
@@ -552,6 +554,7 @@ export default function ProjectManager() {
                 >
                   <Grid item>
                     <KeyboardDatePicker
+                      DialogProps={{ style: { zIndex: 1302 } }}
                       style={{ width: matchesSM ? 250 : undefined }}
                       format="MM/dd/yyyy"
                       value={date}
@@ -576,7 +579,7 @@ export default function ProjectManager() {
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">$</InputAdornment>
-                        ),
+                        )
                       }}
                       value={total}
                       id="total"
